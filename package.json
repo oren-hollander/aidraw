@@ -7,6 +7,10 @@
     "aidraw": "dist/index.js"
   },
   "type": "module",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
@@ -16,7 +20,8 @@
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "format": "prettier --write src",
-    "format:check": "prettier --check src"
+    "format:check": "prettier --check src",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "diagram",
@@ -24,10 +29,21 @@
     "ai",
     "excalidraw",
     "rough",
-    "hand-drawn"
+    "hand-drawn",
+    "png",
+    "flowchart",
+    "architecture"
   ],
-  "author": "",
+  "author": "Oren Hollander",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oren-hollander/aidraw.git"
+  },
+  "homepage": "https://github.com/oren-hollander/aidraw#readme",
+  "bugs": {
+    "url": "https://github.com/oren-hollander/aidraw/issues"
+  },
   "dependencies": {
     "@napi-rs/canvas": "^0.1.65",
     "ajv": "^8.12.0",
