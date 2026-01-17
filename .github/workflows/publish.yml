@@ -7,7 +7,7 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    # Skip if commit message contains [skip ci] or was made by this workflow
+    # Skip if a commit message contains [skip ci] or was made by this workflow
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
 
     steps:
@@ -32,7 +32,8 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Bump version
-        run: npm version patch -m "chore: bump version to %s [skip ci]"
+        run: |
+          npm version patch -m "chore: bump version to %s [skip ci]"
 
       - name: Build
         run: npm run build
