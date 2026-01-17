@@ -4,9 +4,8 @@ node_modules/
 # Build output
 dist/
 
-# Test outputs
-*.png
-!examples/*.png
+# Examples (generated diagrams)
+examples/
 
 # OS files
 .DS_Store

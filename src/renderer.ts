@@ -408,7 +408,15 @@ function renderLine(
 }
 
 // Render an arrow element
-function renderArrow(ctx: SKRSContext2D, rc: RoughCanvas, arrow: ArrowElement, scale: number, elementMap: ElementMap) {
+function renderArrow(
+  ctx: SKRSContext2D,
+  rc: RoughCanvas,
+  arrow: ArrowElement,
+  offsetX: number,
+  offsetY: number,
+  scale: number,
+  elementMap: ElementMap,
+) {
   const startEl = elementMap.get(arrow.start)
   const endEl = elementMap.get(arrow.end)
 
@@ -434,11 +442,11 @@ function renderArrow(ctx: SKRSContext2D, rc: RoughCanvas, arrow: ArrowElement, s
   const startPoint = getConnectionPoint(startEl, arrow.startSide ?? 'auto', endCenter.x, endCenter.y)
   const endPoint = getConnectionPoint(endEl, arrow.endSide ?? 'auto', startCenter.x, startCenter.y)
 
-  // Scale points
-  const sx = startPoint.x * scale
-  const sy = startPoint.y * scale
-  const ex = endPoint.x * scale
-  const ey = endPoint.y * scale
+  // Scale points (apply offset for centering)
+  const sx = (offsetX + startPoint.x) * scale
+  const sy = (offsetY + startPoint.y) * scale
+  const ex = (offsetX + endPoint.x) * scale
+  const ey = (offsetY + endPoint.y) * scale
 
   const opacity = (arrow.style?.opacity ?? 100) / 100
   ctx.globalAlpha = opacity
@@ -495,7 +503,7 @@ function renderElement(
       renderLine(ctx, rc, element as LineElement, offsetX, offsetY, scale)
       break
     case 'arrow':
-      renderArrow(ctx, rc, element as ArrowElement, scale, elementMap)
+      renderArrow(ctx, rc, element as ArrowElement, offsetX, offsetY, scale, elementMap)
       break
   }
 }
@@ -552,7 +560,7 @@ export function render(diagram: DiagramInput, width: number, height: number, con
 
   // Render arrows last (on top)
   for (const arrow of arrows) {
-    renderArrow(ctx, rc, arrow, scale, elementMap)
+    renderArrow(ctx, rc, arrow, offsetX, offsetY, scale, elementMap)
   }
 
   return canvas.toBuffer('image/png')
