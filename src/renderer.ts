@@ -3,17 +3,17 @@ import roughModule from 'roughjs'
 import type { RoughCanvas } from 'roughjs/bin/canvas.js'
 import type { Options as RoughOptions } from 'roughjs/bin/core.js'
 import {
-  Element,
-  ShapeElement,
-  TextElement,
-  LineElement,
   ArrowElement,
-  DiagramInput,
-  Config,
   BoundingBox,
-  ResolvedElement,
+  Config,
+  DiagramInput,
+  Element,
   ElementMap,
+  LineElement,
+  ResolvedElement,
+  ShapeElement,
   Style,
+  TextElement,
 } from './types.js'
 
 const rough = roughModule.default || roughModule
@@ -87,7 +87,12 @@ export function buildElementMap(elements: Element[], parentX = 0, parentY = 0): 
 }
 
 // Calculate bounding box for all elements
-export function calculateBoundingBox(elements: Element[], elementMap: ElementMap, parentX = 0, parentY = 0): BoundingBox {
+export function calculateBoundingBox(
+  elements: Element[],
+  elementMap: ElementMap,
+  parentX = 0,
+  parentY = 0,
+): BoundingBox {
   let minX = Infinity
   let minY = Infinity
   let maxX = -Infinity
@@ -278,8 +283,8 @@ function renderShape(
   const options = styleToRoughOptions(shape.style)
 
   // Apply opacity
-  const opacity = (shape.style?.opacity ?? 100) / 100
-  ctx.globalAlpha = opacity
+
+  ctx.globalAlpha = (shape.style?.opacity ?? 100) / 100
 
   // Apply rotation if needed
   if (shape.rotation) {
@@ -362,8 +367,7 @@ function renderText(ctx: SKRSContext2D, text: TextElement, offsetX: number, offs
   const fontSize = (text.fontSize ?? 16) * scale
   const fontFamily = FONT_FAMILIES[text.fontFamily ?? 'hand']
 
-  const opacity = (text.style?.opacity ?? 100) / 100
-  ctx.globalAlpha = opacity
+  ctx.globalAlpha = (text.style?.opacity ?? 100) / 100
 
   ctx.font = `${fontSize}px ${fontFamily}`
   ctx.fillStyle = text.style?.stroke ?? DEFAULT_STYLE.stroke
@@ -448,8 +452,7 @@ function renderArrow(
   const ex = (offsetX + endPoint.x) * scale
   const ey = (offsetY + endPoint.y) * scale
 
-  const opacity = (arrow.style?.opacity ?? 100) / 100
-  ctx.globalAlpha = opacity
+  ctx.globalAlpha = (arrow.style?.opacity ?? 100) / 100
 
   // Draw line
   const options = styleToRoughOptions(arrow.style)
