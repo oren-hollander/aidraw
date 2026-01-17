@@ -1,0 +1,73 @@
+{
+  "elements": [
+    {
+      "type": "rectangle",
+      "id": "frontend",
+      "x": 50,
+      "y": 50,
+      "width": 200,
+      "height": 150,
+      "label": "Frontend",
+      "style": { "fill": "#a5d8ff", "fillStyle": "solid" },
+      "children": [
+        {
+          "type": "rectangle",
+          "id": "react",
+          "x": 25,
+          "y": 50,
+          "width": 150,
+          "height": 40,
+          "label": "React App"
+        },
+        {
+          "type": "rectangle",
+          "id": "nginx",
+          "x": 25,
+          "y": 100,
+          "width": 150,
+          "height": 40,
+          "label": "Nginx",
+          "style": { "fill": "#dee2e6" }
+        }
+      ]
+    },
+    {
+      "type": "rectangle",
+      "id": "backend",
+      "x": 320,
+      "y": 50,
+      "width": 200,
+      "height": 150,
+      "label": "Backend",
+      "style": { "fill": "#b2f2bb", "fillStyle": "solid" },
+      "children": [
+        {
+          "type": "rectangle",
+          "id": "api",
+          "x": 25,
+          "y": 50,
+          "width": 150,
+          "height": 40,
+          "label": "API Server"
+        },
+        {
+          "type": "rectangle",
+          "id": "db",
+          "x": 25,
+          "y": 100,
+          "width": 150,
+          "height": 40,
+          "label": "PostgreSQL",
+          "style": { "fill": "#ffec99" }
+        }
+      ]
+    },
+    {
+      "type": "arrow",
+      "id": "conn",
+      "start": "nginx",
+      "end": "api",
+      "label": "REST API"
+    }
+  ]
+}
