@@ -1,6 +1,6 @@
 {
   "name": "aidraw",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "AI-friendly CLI tool for creating hand-drawn style diagrams",
   "main": "dist/index.js",
   "bin": {
